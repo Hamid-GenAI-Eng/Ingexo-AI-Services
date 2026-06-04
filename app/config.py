@@ -8,7 +8,8 @@ PORT = int(os.getenv("PORT", 8000))
 HOST = os.getenv("HOST", "127.0.0.1")
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+# TEMPORARY: Override gemini-2.0-flash with gemini-flash-latest to bypass daily quota exhaustion
+GEMINI_MODEL = "gemini-flash-latest"
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_INDEX = os.getenv("PINECONE_INDEX", "document-embeddings")
 
