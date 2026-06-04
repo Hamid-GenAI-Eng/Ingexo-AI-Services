@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 import requests
 import uvicorn
-from app.config import PORT, HOST, WEBHOOK_URL
+from app.config import PORT, HOST, WEBHOOK_URL, GEMINI_MODEL
 from app.pipeline import process_document_pipeline, generate_rag_response
 from app.vectorizer import chunk_text
 from app.pinecone_db import upsert_document_chunks, query_pinecone_index, delete_document_vectors
@@ -112,8 +112,10 @@ def get_service_status():
         "status": "healthy",
         "service": "Ingexo AI Ingestion Service",
         "port": PORT,
-        "engine": "FastAPI (Python)"
+        "engine": "FastAPI (Python)",
+        "model": GEMINI_MODEL
     }
+
 
 @app.post("/process", status_code=status.HTTP_202_ACCEPTED)
 def trigger_ingest_pipeline(task: IngestRequest, background_tasks: BackgroundTasks):
